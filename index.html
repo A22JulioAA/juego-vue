@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Batalla</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Batalla</h1>
+    </header>
+    <div id="game">
+      <section id="monster" class="container">
+        <h2>Enemigo</h2>
+        <div class="healthbar">
+          <div
+            :style="{ width: vidaEnemigo + '%' }"
+            class="healthbar__value"
+          ></div>
+        </div>
+      </section>
+      <section id="player" class="container">
+        <h2>Usuario</h2>
+        <div class="healthbar">
+          <div
+            :style="{ width: vidaUsuario + '%' }"
+            class="healthbar__value"
+          ></div>
+        </div>
+      </section>
+      <section class="container" v-if="!comprobarVida">
+        <h2>Fin partida!</h2>
+        <h3 v-if="derrota">Perdiches!</h3>
+        <h3 v-if="victoria">Ganaches</h3>
+        <h3 v-if="empate">Empate</h3>
+        <button>Novo xogo</button>
+      </section>
+      <section id="controls">
+        <button @click="ataqueNormal">ATAQUE</button>
+        <button @click="ataqueEspecial">ATAQUE ESPECIAL</button>
+
+        <button>CURACIÓN</button>
+        <button>RENDERSE</button>
+        <span v-if="errorAtaqueEspecial">{{errorAtaqueEspecial}}</span>
+      </section>
+
+      <section id="log" class="container">
+        <h2>Rexistro da batalla</h2>
+        <ul>
+          <li v-for="daño of arrayDañosEnemigo">Enemigo ataca con {{daño}}</li>
+          <li v-for="daño of arrayDañosUsuario">Usuario ataca con {{daño}}</li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
